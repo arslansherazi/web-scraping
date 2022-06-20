@@ -1,8 +1,5 @@
-from time import sleep
-
 import scrapy
 
-from scraper.db import insert_laptop_details
 from scraper.items import LaptopDetails
 
 
