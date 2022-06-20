@@ -24,3 +24,11 @@ scrapy crawl spider_name_here
 Example:
 scrapy crawl daraz_smart_phones
 ~~~
+
+## Install Splash
+~~~
+docker pull scrapinghub/splash
+~~~
+~~~
+docker run -p 8050:8050 scrapinghub/splash
+~~~
