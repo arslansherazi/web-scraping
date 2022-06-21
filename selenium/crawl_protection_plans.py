@@ -1,13 +1,16 @@
 from selenium import webdriver
 from scrapy.selector import Selector
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 class CrawlProtectionPlans(object):
 
     def __init__(self):
-        self.driver = webdriver.Firefox(executable_path='./geckodriver')
+        self.driver = webdriver.Chrome('./chromedriver')
+        # self.driver = webdriver.Firefox(executable_path='./geckodriver')
 
     def crawl(self):
+        WebDriverWait(self.driver, 10)
         self.driver.get('https://www.newegg.com/lg-c1-65/p/N82E16889007772')
         selector = Selector(text=self.driver.page_source)
         protection_plans = selector.xpath(
