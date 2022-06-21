@@ -7,7 +7,7 @@ from scrapy.utils.project import get_project_settings
 from scrapy.crawler import CrawlerRunner
 from scrapy.utils.log import configure_logging
 
-from selenium.crawl_protection_plans import AppliancesSpider
+from scraper.spiders.laptops_details import LaptopsDetailsSpider
 
 logger = logging
 
@@ -46,9 +46,8 @@ def run():
 
     @defer.inlineCallbacks
     def crawl():
-        # yield runner.crawl(BeautyProductsSpider)
-        # yield runner.crawl(LaptopsDetailsSpider)
-        yield runner.crawl(AppliancesSpider)
+        yield runner.crawl(BeautyProductsSpider)
+        yield runner.crawl(LaptopsDetailsSpider)
         reactor.stop()
     crawl()
     reactor.run()
