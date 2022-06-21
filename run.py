@@ -16,7 +16,7 @@ logger = logging
 class RunSpiders(object):
     def __init__(self):
         self.runner = CrawlerRunner(get_project_settings())
-        configure_logging()
+        # configure_logging()
 
     @staticmethod
     def crawler_results(signal, sender, item, response, spider):
