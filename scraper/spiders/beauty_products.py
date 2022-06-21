@@ -55,9 +55,9 @@ class BeautyProductsSpider(scrapy.Spider):
                     beauty_product['price'] = product_data.xpath('div/div/div/a/span/span/text()').extract_first()
                     beauty_product['image_url'] = product_data.xpath('div/span/a/div/img/@src').extract_first()
                     yield beauty_product
-                except Exception as e:
+                except Exception as err:
                     logger.error("Exception occurred at item level")
                     continue
         except Exception as e:
-            # logger.error("Exception occurred at page")
+            logger.error("Exception occurred at page")
             pass

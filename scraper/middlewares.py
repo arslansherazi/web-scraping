@@ -1,14 +1,32 @@
-# Define here the models for your spider middleware
-#
-# See documentation in:
-# https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-
 from scrapy import signals
-
-# useful for handling different item types with a single interface
-from itemadapter import is_item, ItemAdapter
+from scraper_api import ScraperAPIClient
 
 
+# user defined middlewares
+class ProxyMiddleware:
+    def __init__(self, settings):
+        self.scraper_api_client = ScraperAPIClient(settings.get('SCRAPER_API_KEY'))
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(crawler.settings)
+
+    def process_request(self, request, spider):
+        url = request.url
+        url = self.scraper_api_client.scrapyGet(url=url, headers=request.headers, country_code='us')
+        return request.replace(url=url)
+
+    def process_response(self, request, response, spider):
+        return response
+
+    def process_exception(self, request, exception, spider):
+        pass
+
+    def spider_opened(self, spider):
+        spider.logger.info('Spider opened: %s' % spider.name)
+
+
+# default middlewares
 class ScraperSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
