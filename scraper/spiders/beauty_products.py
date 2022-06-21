@@ -59,4 +59,5 @@ class BeautyProductsSpider(scrapy.Spider):
                     logger.error("Exception occurred at item level")
                     continue
         except Exception as e:
-            logger.error("Exception occurred at page")
+            # logger.error("Exception occurred at page")
+            pass
